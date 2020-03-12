@@ -1,9 +1,9 @@
-<mat-toolbar>ISO Container info</mat-toolbar>
-<div style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+<mat-toolbar style="background: black; box-shadow: 0 2px 4px rgba(0,0,0,.5);">ISO Container information</mat-toolbar>
+<div class="mainContainer" >
   <mat-card>
     <app-container-input></app-container-input>
   </mat-card>
-  <mat-card>
+  <mat-card *ngIf="http.containerInfo" style="margin-top: 10px; background: #afafaf">
     <app-container-info></app-container-info>
   </mat-card>
 </div>

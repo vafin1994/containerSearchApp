@@ -1,1 +1,49 @@
-<p>container-info works!</p>
+<div *ngIf="http.containerInfo">
+  <div style="text-align: center;
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 7px;">Container Information
+  </div>
+  <div style="display: flex; justify-content: space-evenly">
+    <div class="tableColumn">
+      <span class="tableTitle">id:</span> <span class="tableValue">{{http.containerInfo.id}}</span>
+    </div>
+    <div class="tableColumn">
+      <span class="tableTitle">owner:</span> <span class="tableValue">{{http.containerInfo.owner}}</span>
+    </div>
+  </div>
+
+  <div style="border: 1px solid black; margin-top: 8px" *ngFor="let historyEvent of http.containerInfo.history">
+
+    <div style="display: flex; justify-content: space-evenly">
+      <div class="tableColumn">
+        <span class="tableTitle">dateFrom:</span> <span class="tableValue">{{historyEvent.dateFrom}}</span>
+      </div>
+      <div class="tableColumn">
+        <span class="tableTitle">dateTo:</span> <span class="tableValue">{{historyEvent.dateTo}}</span>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-evenly">
+      <div class="tableColumn">
+        <span class="tableTitle">sourcePort:</span> <span class="tableValue">{{historyEvent.sourcePort}}</span>
+      </div>
+      <div class="tableColumn">
+        <span class="tableTitle">destinationPort:</span> <span
+        class="tableValue">{{historyEvent.destinationPort}}</span>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-evenly">
+      <div class="tableColumn">
+        <span class="tableTitle">sender:</span> <span class="tableValue">{{historyEvent.sender}}</span>
+      </div>
+      <div class="tableColumn">
+        <span class="tableTitle">recipient:</span> <span class="tableValue">{{historyEvent.recipient}}</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
