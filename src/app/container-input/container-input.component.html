@@ -1,9 +1,9 @@
 <div style="text-align: center; font-size: 21px">Для поиска истории контейнера введите его номер</div>
 <div style="display: flex; justify-content: center; align-items: center; height: 150px">
-  <mat-form-field style="min-width: 300px; font-size: 18px" appearance="outline">
+  <mat-form-field color="accent" style="min-width: 300px; width: 340px; font-size: 18px" appearance="outline">
     <mat-label>Введите номер контейнера</mat-label>
-    <input matInput maxlength="11" [(ngModel)]="inputValue" (ngModelChange)="inputValue = $event.toUpperCase()"
-           (input)="onInputCheck($event)">
+    <input matInput maxlength="11"   (keyup)="onKeyUpCheck($event)" [(ngModel)]="inputValue"
+           (ngModelChange)="inputValue = $event.toUpperCase(); onModelChangeCheck($event)">
     <mat-icon matSuffix>search</mat-icon>
     <mat-hint *ngIf="errorMessage.show" style="color: #f44336">
       {{this.errorMessage.text}}
@@ -11,11 +11,10 @@
   </mat-form-field>
 </div>
 <div style="display: flex; justify-content: space-evenly; align-items: center">
-  <button (click)="this.inputValue = null" color="warn" mat-raised-button>
+  <button (click)="this.inputValue = null" style="background-color: #820808;" mat-raised-button>
     Очистить
   </button>
   <button [disabled]="!isSearchingEnable" (click)="search()" color="accent" mat-raised-button>
     Поиск
   </button>
 </div>
-

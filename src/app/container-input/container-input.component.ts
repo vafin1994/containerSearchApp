@@ -8,7 +8,7 @@ import {ControlSumCounterService} from '../services/control-sum-counter.service'
   styleUrls: ['./container-input.component.css']
 })
 export class ContainerInputComponent implements OnInit {
-  inputValue: string;
+  inputValue = '';
   errorMessage: { show: boolean, text: string } = {show: false, text: ''};
   isSearchingEnable = false;
 
@@ -18,17 +18,32 @@ export class ContainerInputComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onInputCheck(event) {
-    if (event.data) {
-      let symbol = event.data;
+  // This check in case user will paste id number in input form
+  onModelChangeCheck(event: string) {
+    const regExp = /[A-z]{4}\d{7}/;
+    const testResult: boolean = regExp.test(event);
+    this.isSearchingEnable = testResult;
+    if (testResult && event.length === 11) {
+      this.isSearchingEnable = this.controlSumCounterService.checkControlSum(this.inputValue);
+    }
+  }
+
+  // This check in case user will type id number
+  onKeyUpCheck(event: KeyboardEvent) {
+    console.log(event);
+    if (event.key) {
+      let symbol = event.key;
       symbol = symbol.toUpperCase();
-      if (!this.checkIsRightSymbol(symbol)) {
-        console.log('Wrong');
+      const isSymbolRight = this.checkIsRightSymbol(symbol);
+      if (!isSymbolRight) {
         this.showErrorMessage();
-        this.inputValue = this.inputValue.slice(0, -1);
-        // TODO delete last typed symbol
+        this.isSearchingEnable = false;
+        // Prevent deleting two symbols when keyup - Backspace
+        if (event.key !== 'Backspace') {
+          this.inputValue = this.inputValue.substring(0, this.inputValue.length - 1);
+        }
       }
-      if (this.checkIsRightSymbol(symbol) && this.inputValue.length === 11) {
+      if (isSymbolRight && this.inputValue.length === 11) {
         this.isSearchingEnable = true;
       }
     }
@@ -47,6 +62,7 @@ export class ContainerInputComponent implements OnInit {
     }
   }
 
+
   showErrorMessage() {
     let errorText: string;
     if (this.inputValue.length <= 4) {
@@ -54,7 +70,7 @@ export class ContainerInputComponent implements OnInit {
     } else if (this.inputValue.length === 11) {
       errorText = 'Контрольная сумма не совпадает, проверьте правильность введенного номера';
     } else if (this.inputValue.length > 4) {
-      errorText = 'Введен неверный символ. Введите цифру латинского алфавита';
+      errorText = 'Введен неверный символ. Введите цифру';
     }
     this.errorMessage = {show: true, text: errorText};
   }
