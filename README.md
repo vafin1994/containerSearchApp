@@ -28,15 +28,15 @@ If project start from IDE go to next step
 OR
 
 Copy all this in your command line, and wait untill all of this will done automatically
-`
-git clone https://github.com/vafin1994/containerSearchApp.git
 
-cd containerSearchApp
+`git clone https://github.com/vafin1994/containerSearchApp.git`
 
-npm i
+`cd containerSearchApp`
 
-npm link @angular/cli
+`npm i`
 
-ng serve
-`
+`npm link @angular/cli`
+
+`ng serve`
+
 
