@@ -30,9 +30,13 @@ OR
 Copy all this in your command line, and wait untill all of this will done automatically
 `
 git clone https://github.com/vafin1994/containerSearchApp.git
+
 cd containerSearchApp
+
 npm i
+
 npm link @angular/cli
+
 ng serve
 `
 
