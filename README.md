@@ -1,4 +1,4 @@
-# containerSearchApp
+# Container Search App
 Web application for cargo container information search 
 
 1)Clone this repository
